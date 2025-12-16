@@ -1,0 +1,59 @@
+<div class="container">
+
+    <h2>Posts</h2>
+  
+    <!-- Loader -->
+    <div *ngIf="postService.loading()" class="loader">
+      Loading...
+    </div>
+  
+    <!-- Error -->
+    <div *ngIf="postService.error()" class="error">
+      {{ postService.error() }}
+    </div>
+  <!-- Add Post Button -->
+  <div class="add-btn">
+    <button (click)="toggleForm()">
+      {{ showForm ? 'Cancel' : 'Add Post' }}
+    </button>
+  </div>
+
+  <!-- Add Post Form (Below Table) -->
+  <div *ngIf="showForm" class="form">
+    <input
+      type="text"
+      placeholder="Title"
+      [(ngModel)]="title"
+    />
+
+    <textarea
+      placeholder="Body"
+      [(ngModel)]="body">
+    </textarea>
+
+    <button (click)="submitPost()" [disabled]="postService.loading()">
+      Submit
+    </button>
+  </div>
+    <!-- Posts Table -->
+    <table *ngIf="!postService.loading() && postService.posts().length">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Body</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of postService.posts()">
+          <td>{{ post.id }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.body }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    
+  
+  </div>
+  
