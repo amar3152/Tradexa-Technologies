@@ -43,7 +43,7 @@ export class PostService {
       )
       .subscribe(newPost => {
         if (newPost) {
-          this.posts.update(posts => [...posts, newPost]); // ✅ add at bottom
+          this.posts.update(posts => [...posts, newPost]); 
         }
       });
   }
